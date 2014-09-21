@@ -57,3 +57,6 @@ kwalify -f ../loot.github.io/masterlist.schema.yaml masterlist.yaml
 if [ "$(kwalify -q -f ../loot.github.io/masterlist.schema.yaml masterlist.yaml|wc -l)" != "0" ]; then
     exit 1
 fi
+
+# Check that .travis.yml isn't broken
+travis-lint
