@@ -48,3 +48,9 @@ git diff-index --check --cached $against -- || exit $?
 
 # Check that the masterlist is valid YAML
 ruby -e "require 'yaml'; YAML.load_file('masterlist.yaml')" || exit $?
+
+# Check against Kwalify
+kwalify -f ../loot.github.io/masterlist.schema.yaml masterlist.yaml
+if [ "$(kwalify -q -f ../loot.github.io/masterlist.schema.yaml masterlist.yaml|wc -l)" != "0" ]; then
+    exit 1
+fi
