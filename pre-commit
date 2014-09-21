@@ -46,6 +46,9 @@ fi
 # If there are whitespace errors, print the offending file names and fail.
 git diff-index --check --cached $against -- || exit $?
 
+# Check for lines not complying with the "coding style", but don't fail
+grep --line-number --basic-regexp "name: [^']" masterlist.yaml || true
+
 # Check that the masterlist is valid YAML
 ruby -e "require 'yaml'; YAML.load_file('masterlist.yaml')" || exit $?
 
